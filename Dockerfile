@@ -44,6 +44,10 @@ RUN set -ex \
     && apt-get dist-upgrade -y \
     && apt-get install -y --no-install-recommends \
         ca-certificates \
+        libboost-system1.67.0 \
+        libncurses5 \
+        libpython3.7 \ 
+        python3-numpy \
     && apt-get clean \
     && rm -rf \
         /var/lib/apt/lists/* \
@@ -80,7 +84,7 @@ ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:$INSTALL_DIR/lib
 ENV PYTHONPATH $PYTHONPATH:$INSTALL_DIR/lib/python
 
 
-
+COPY ./docker-entrypoint.sh $WORK_DIR
 
 COPY --from=builder $INSTALL_DIR $INSTALL_DIR
 
@@ -98,3 +102,5 @@ RUN set -ex \
     && mkdir -p $HOME/.seiscomp4
 
 USER root
+
+ENTRYPOINT ["./docker-entrypoint.sh"]
