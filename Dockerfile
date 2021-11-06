@@ -27,6 +27,7 @@ RUN set -ex \
         # Graphical interface dependencies
         libqtgui4 \
         libqt4-xml \
+        libssl \
         # Misc
         gosu \
         rsync \
