@@ -17,9 +17,9 @@ RUN set -ex \
         libpq5 \
         libpython2.7 \
         libxml2 \
-        python \
-        python-dateutil \
-        python-twisted \
+        python3 \
+        python3-dateutil \
+        python3-twisted \
         # Database dependencies
         libmariadb3 \
         postgresql \
@@ -47,35 +47,6 @@ ENV PATH $PATH:$INSTALL_DIR/bin:$INSTALL_DIR/sbin
 ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:$INSTALL_DIR/lib
 ENV PYTHONPATH $PYTHONPATH:$INSTALL_DIR/lib/python
 
-RUN set -ex \
-    && buildDeps=' \
-        build-essential \
-        ca-certificates \
-        cmake \
-        default-libmysqlclient-dev \
-        gfortran \
-        git \
-        libboost-dev \
-        libboost-filesystem-dev \
-        libboost-iostreams-dev \
-        libboost-program-options-dev \
-        libboost-regex-dev \
-        libboost-signals-dev \
-        libboost-thread-dev \
-        libboost-test-dev \
-        libfl-dev \
-        libpq-dev \
-        libqt4-dev \
-        libsqlite3-dev \
-        libssl-dev \
-        libxml2-dev \
-        python-dev \
-        wget \
-        ninja-build \
-    ' \
-    && apt-get update \
-    && apt-get install -y --no-install-recommends \
-        $buildDeps
 ARG SEISCOMP_VERSION=4.7.2
 RUN cd /tmp \
     && wget https://www.seiscomp.de/downloader/seiscomp-$SEISCOMP_VERSION-debian10-x86_64.tar.gz \
