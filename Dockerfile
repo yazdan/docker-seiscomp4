@@ -107,6 +107,10 @@ ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:$INSTALL_DIR/lib
 ENV PYTHONPATH $PYTHONPATH:$INSTALL_DIR/lib/python
 
 
+
+
+COPY --from=builder $INSTALL_DIR $INSTALL_DIR
+
 RUN set -ex \
     && useradd -m -s /bin/bash sysop \
     && chown -R sysop:sysop $INSTALL_DIR \
@@ -114,8 +118,6 @@ RUN set -ex \
     && chown sysop:sysop /data
 
 USER sysop
-
-COPY --from=builder $INSTALL_DIR $INSTALL_DIR
 
 RUN set -ex \
     && mkdir -p $SEISCOMP4_CONFIG \
