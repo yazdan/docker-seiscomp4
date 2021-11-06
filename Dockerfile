@@ -30,6 +30,9 @@ RUN set -ex \
         # Misc
         gosu \
         rsync \
+        wget \
+        vim \
+        nano \
     && apt-get clean \
     && rm -rf \
         /var/lib/apt/lists/* \
