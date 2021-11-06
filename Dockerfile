@@ -78,21 +78,9 @@ RUN set -ex \
         $buildDeps
 ARG SEISCOMP_VERSION=4.7.2
 RUN cd /tmp \
-    && wget https://github.com/SeisComP/seiscomp/archive/refs/tags/$SEISCOMP_VERSION.tar.gz \
-    && tar -xzvf "$SEISCOMP_VERSION.tar.gz" \
-    && mv seiscomp-$SEISCOMP_VERSION seiscomp4
-RUN mkdir -p $BUILD_DIR/build \
-    && cd $BUILD_DIR/build \
-    && cmake \
-        -G Ninja \
-        -DSC_GLOBAL_GUI=ON \
-        -DSC_TRUNK_DB_MYSQL=ON \
-        -DSC_TRUNK_DB_POSTGRESQL=ON \
-        -DSC_TRUNK_DB_SQLITE3=ON \
-        -DCMAKE_INSTALL_PREFIX=$INSTALL_DIR \
-        .. \
-    && ninja \
-    && ninja install
+    && wget https://www.seiscomp.de/downloader/seiscomp-$SEISCOMP_VERSION-debian10-x86_64.tar.gz \
+    && tar -xzvf "seiscomp-$SEISCOMP_VERSION-debian10-x86_64.tar.gz" \
+    && mv seiscomp $INSTALL_DIR
 
 FROM base as app
 
