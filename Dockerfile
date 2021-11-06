@@ -39,6 +39,14 @@ RUN set -ex \
         /var/lib/apt/lists/* \
         /tmp/* \
         /var/tmp/*
+RUN set -ex \
+    && apt-get update \
+    && apt-get dist-upgrade -y \
+    && apt-get clean \
+    && rm -rf \
+        /var/lib/apt/lists/* \
+        /tmp/* \
+        /var/tmp/*
 
 FROM base as builder
 ENV WORK_DIR /opt/seiscomp4
